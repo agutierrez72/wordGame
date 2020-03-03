@@ -1,5 +1,6 @@
 #include <server.h>
 #include <algorithm>
+#include <random>
 
 using namespace ucm;
 
@@ -25,16 +26,16 @@ int main(int argc, char** argv){
     server.renderHTML("/", "index.html");
 
     server.route("/list", [&](const request& req, response& res){
+
+        std::uniform_int_distribution<> distribution(65, 90);
+        std::mt19937 gen;
+        gen.seed(std::random_device()());
+
         json temp;
-        temp.push_back(65);
-        temp.push_back(66);
-        temp.push_back(67);
-        temp.push_back(68);
-        temp.push_back(69);
-        temp.push_back(70);
-        temp.push_back(71);
-        temp.push_back(72);
-        temp.push_back(73);
+
+        for (int i = 0; i < 9; i++){
+            temp.push_back(distribution(gen));
+        }
 
         res.sendJSON(temp);
     });
