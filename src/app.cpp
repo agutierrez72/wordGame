@@ -2,6 +2,20 @@
 
 using namespace ucm;
 
+std::vector<std::string> readWordsFile(std::string filename){
+	std::ifstream file(filename);
+	std::string str; 
+
+	std::vector<std::string> words;
+
+	while (std::getline(file, str)){
+		words.push_back(boost::to_upper_copy(str));
+		
+	}
+
+	return words;
+}
+
 
 int main(int argc, char** argv){
 
@@ -28,9 +42,20 @@ int main(int argc, char** argv){
         if (req.has_params({"word"})){
             std::string word = req.url_params.get("word");
 
+            std::vector<std::string> allTheWords = readWordsFile("misc/english.txt");
+
+            bool found = false;
+
+            for (int i = 0; i < allTheWords.size(); i++){
+                if (allTheWords[i] == word){
+                    found = true;
+                    break;
+                }
+            }
+
             json temp;
             temp["word"] = word;
-            temp["valid"] = true;
+            temp["valid"] = found;
 
             res.sendJSON(temp);
         }
