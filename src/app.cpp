@@ -1,4 +1,5 @@
 #include <server.h>
+#include <algorithm>
 
 using namespace ucm;
 
@@ -44,14 +45,7 @@ int main(int argc, char** argv){
 
             std::vector<std::string> allTheWords = readWordsFile("misc/english.txt");
 
-            bool found = false;
-
-            for (int i = 0; i < allTheWords.size(); i++){
-                if (allTheWords[i] == word){
-                    found = true;
-                    break;
-                }
-            }
+            bool found = find(allTheWords.begin(), allTheWords.end(), word) != allTheWords.end();
 
             json temp;
             temp["word"] = word;
