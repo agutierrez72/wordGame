@@ -34,6 +34,9 @@ int main(int argc, char** argv){
 
             res.sendJSON(temp);
         }
+        else {
+            res.sendError400();
+        }
     });
 
     server.run();
