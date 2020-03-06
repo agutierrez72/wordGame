@@ -16,7 +16,7 @@ std::vector<std::string> readWordsFile(std::string filename){
 
 ucm::json Game::checkWord(std::string word){
     std::vector<std::string> allTheWords = readWordsFile("misc/english.txt");
-
+    word = boost::to_upper_copy(word);
 
     bool found = find(allTheWords.begin(), allTheWords.end(), word) != allTheWords.end();
 
