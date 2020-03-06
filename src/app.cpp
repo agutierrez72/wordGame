@@ -1,27 +1,30 @@
 #include <server.h>
 #include <algorithm>
 #include <random>
+ #include <Game.h>
 
 using namespace ucm;
 
-std::vector<std::string> readWordsFile(std::string filename){
-	std::ifstream file(filename);
-	std::string str; 
+// std::vector<std::string> readWordsFile(std::string filename){
+// 	std::ifstream file(filename);
+// 	std::string str; 
 
-	std::vector<std::string> words;
+// 	std::vector<std::string> words;
 
-	while (std::getline(file, str)){
-		words.push_back(boost::to_upper_copy(str));
+// 	while (std::getline(file, str)){
+// 		words.push_back(boost::to_upper_copy(str));
 		
-	}
+// 	}
 
-	return words;
-}
+// 	return words;
+// }
 
 
 int main(int argc, char** argv){
 
     Server server(argc, argv);
+
+     Game game;
 
     server.renderHTML("/", "index.html");
 
@@ -43,16 +46,8 @@ int main(int argc, char** argv){
     server.route("/checkWord", [&](const request& req, response& res){
         if (req.has_params({"word"})){
             std::string word = req.url_params.get("word");
-
-            std::vector<std::string> allTheWords = readWordsFile("misc/english.txt");
-
-            bool found = find(allTheWords.begin(), allTheWords.end(), word) != allTheWords.end();
-
-            json temp;
-            temp["word"] = word;
-            temp["valid"] = found;
-
-            res.sendJSON(temp);
+            
+             res.sendJSON(game.checkWord(word));
         }
         else {
             res.sendError400();
