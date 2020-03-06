@@ -17,19 +17,19 @@ Context(CheckWord){
 		ans["valid"] = false;
 		Assert::That(game.checkWord("FAC "), Equals(ans));
 	};
-	Spec(CheckTIisInvalid){
+	Spec(CheckTIisValid){
 		ans["word"] = "TI";
-		ans["valid"] = false;
+		ans["valid"] = true;
 		Assert::That(game.checkWord("TI"), Equals(ans));
 	};
 	Spec(ChecktiIsInvalid){
-		ans["word"] = "ti";
-		ans["valid"] = false;
+		ans["word"] = "TI";
+		ans["valid"] = true;
 		Assert::That(game.checkWord("ti"), Equals(ans));
 	};
 	Spec(CheckAdditionIsValid){
-		ans["word"] = "addition";
-		ans["valid"] = false;
+		ans["word"] = "ADDITION";
+		ans["valid"] = true;
 		Assert::That(game.checkWord("addition"), Equals(ans));
 	};
 
