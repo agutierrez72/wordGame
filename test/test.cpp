@@ -1,6 +1,7 @@
 #include <igloo/igloo.h>
-
+#include <string>
 #include <Game.h>
+#include <algorithm>
 
 using namespace igloo;
 
@@ -33,6 +34,16 @@ Context(CheckWord){
 		Assert::That(game.checkWord("addition"), Equals(ans));
 	};
 
+};
+
+// Test to check if one string is a subset of another
+// Plan to use to find the solution set for 9 letter words
+Context(IsPermutation){
+	std::string par = "ADDITION";
+	std::string sub1 = "ADD";
+	Spec(addIsPAddition){
+		Assert::That(std::is_permutation(par.begin(), par.end(), sub1.begin()), Equals(1));
+	};
 };
 
 
