@@ -140,3 +140,17 @@ std::vector<std::string> Game::getAllPossibleSubstrings(std::string word){
     }
     return possible;
 }// end of getAllPossibleSubstrings
+
+std::vector<char> Game::mixup(std::string word){
+    // transfer chars from string to a vector of chars
+    std::vector<char> result;
+
+
+    for(int i = 0; i < word.size(); i++){
+        result.push_back(word[i]);
+    }
+
+    //shuffle vector of chars
+    std::random_shuffle(result.begin(), result.end());
+    return result;
+}// end of mixup
