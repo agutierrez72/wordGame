@@ -1,20 +1,27 @@
 #include <Game.h>
 #include <random>
-std::vector<std::string> readWordsFile(std::string filename){
+#include <algorithm>
+#include <TimeSupport.h>
+
+void Game::readWordsFile(std::string filename){
 	std::ifstream file(filename);
 	std::string str; 
 
-	std::vector<std::string> words;
-
 	while (std::getline(file, str)){
-		words.push_back(boost::to_upper_copy(str));
-		
+        theWords.insert({boost::to_upper_copy(str), true});
+		allTheWords.push_back(boost::to_upper_copy(str));
 	}
 
 	return words;
 }
 
+// At start of game read words from file
+Game::Game(){
+    readWordsFile("misc/english.txt");
+}
+
 ucm::json Game::generateList(){
+
     std::uniform_int_distribution<> distribution(65, 90);
     std::mt19937 gen;
     gen.seed(std::random_device()());
