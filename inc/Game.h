@@ -19,6 +19,8 @@ class Game{
 
         std::vector<std::string> distinctPowerset(std::string str);
         void permute(std::string a, int l, int r, std::unordered_map<std::string, bool>& results);
+        std::vector<std::string> getAllPossibleSubstrings(std::string word);
+
 };
 
 #endif

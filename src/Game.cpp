@@ -117,3 +117,26 @@ void Game::permute(std::string a, int l, int r, std::unordered_map<std::string, 
         }
     }
 }// end of permute
+
+// Helper Function
+std::vector<std::string> Game::getAllPossibleSubstrings(std::string word){
+    std::vector<std::string> ps = distinctPowerset(word);
+    std::vector<std::string> possible;
+
+    for(std::string item :ps){
+        if(item.size() > 0){
+            if(item.size() == 1){
+                possible.push_back(item);
+            }
+            else{
+                std::unordered_map<std::string, bool> curr;
+                permute(item, 0, item.size()-1, curr);
+
+                for(auto element : curr){
+                    possible.push_back(element.first);
+                }
+            }
+        }
+    }
+    return possible;
+}// end of getAllPossibleSubstrings
