@@ -16,6 +16,9 @@ class Game{
         ucm::json generateList();
         ucm::json checkWord(std::string word);
         ucm::json solution();
+
+        std::vector<std::string> distinctPowerset(std::string str);
+        void permute(std::string a, int l, int r, std::unordered_map<std::string, bool>& results);
 };
 
 #endif

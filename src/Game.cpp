@@ -12,12 +12,12 @@ void Game::readWordsFile(std::string filename){
 		allTheWords.push_back(boost::to_upper_copy(str));
 	}
 
-}
+}// end of readWordsFile
 
 // At start of game read words from file
 Game::Game(){
     readWordsFile("misc/english.txt");
-}
+}// end of Game constructor
 
 ucm::json Game::generateList(){
 
@@ -32,13 +32,11 @@ ucm::json Game::generateList(){
     }
 
     return temp;
-}
+}// end of generateList
 
 ucm::json Game::checkWord(std::string word){
-    // std::vector<std::string> allTheWords = readWordsFile("misc/english.txt");
-     word = boost::to_upper_copy(word);
+    word = boost::to_upper_copy(word);
 
-    // bool found = find(allTheWords.begin(), allTheWords.end(), word) != allTheWords.end();
     timestamp start = current_time();
     auto pos = theWords.find(word);
 
@@ -55,4 +53,67 @@ ucm::json Game::checkWord(std::string word){
     temp["word"] = word;
     temp["valid"] = found;
     return temp;
-}
+}// end of checkWord
+
+std::vector<std::string> Game::distinctPowerset(std::string str){
+    if(str.size() == 0){
+        std::vector<std::string> res;
+        res.push_back("");
+
+        return res;
+    }
+    else{
+        char head = str[0];
+        std::string tail;
+        tail = str.substr (1,std::string::npos);
+
+        std::vector<std::string> res = distinctPowerset(tail);
+        std::vector<std::string> ans = res;
+
+        for(auto element :res){
+            std::string temp = element;
+            temp.insert(temp.begin(), head);
+            bool found = false;
+
+            for(std::string curr : ans){
+                if(curr == temp){
+                    found = true;
+                    break;
+                }
+                else{
+                    if (curr != "" && std::is_permutation(temp.begin(), temp.end(), curr.begin())){
+                        found = true;
+                        break;
+                    }
+                }
+            }
+
+            if(!found){
+                ans.push_back(temp);
+            }
+        }
+        return ans;
+    }
+}// end of distinctPowerset
+
+void Game::permute(std::string a, int l, int r, std::unordered_map<std::string, bool>& results){
+    if(l == r){
+        auto got = results.find(a);
+        if(got == results.end()){
+            results.insert({a, true});
+        }
+    }
+    else{
+        for(int i =l; i <= r; i++){
+            char temp = a[l];
+            a[l] = a[i];
+            a[i] = temp;
+
+            permute(a, l+r, r, results);
+
+            temp = a[l];
+            a[l] = a[i];
+            a[i] = temp;
+        }
+    }
+}// end of permute
