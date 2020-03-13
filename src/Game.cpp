@@ -12,7 +12,6 @@ void Game::readWordsFile(std::string filename){
 		allTheWords.push_back(boost::to_upper_copy(str));
 	}
 
-	return words;
 }
 
 // At start of game read words from file
@@ -36,10 +35,21 @@ ucm::json Game::generateList(){
 }
 
 ucm::json Game::checkWord(std::string word){
-    std::vector<std::string> allTheWords = readWordsFile("misc/english.txt");
-    word = boost::to_upper_copy(word);
+    // std::vector<std::string> allTheWords = readWordsFile("misc/english.txt");
+     word = boost::to_upper_copy(word);
 
-    bool found = find(allTheWords.begin(), allTheWords.end(), word) != allTheWords.end();
+    // bool found = find(allTheWords.begin(), allTheWords.end(), word) != allTheWords.end();
+    timestamp start = current_time();
+    auto pos = theWords.find(word);
+
+    bool found = true;
+    if(pos == theWords.end()){
+        found = false;
+    }
+
+    timestamp end = current_time();
+    long duration = time_diff(start, end);
+    std::cout << "Took: " << duration << " ms." << std::endl;
 
     ucm::json temp;
     temp["word"] = word;

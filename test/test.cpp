@@ -24,7 +24,7 @@ Context(CheckWord){
 		ans["valid"] = true;
 		Assert::That(game.checkWord("TI"), Equals(ans));
 	};
-	Spec(ChecktiIsInvalid){
+	Spec(ChecktiIsValid){
 		ans["word"] = "TI";
 		ans["valid"] = true;
 		Assert::That(game.checkWord("ti"), Equals(ans));
@@ -32,23 +32,23 @@ Context(CheckWord){
 	Spec(CheckAdditionIsValid){
 		ans["word"] = "ADDITION";
 		ans["valid"] = true;
-		Assert::That(game.checkWord("addition"), Equals(ans));
+		Assert::That(game.checkWord("Addition"), Equals(ans));
 	};
 
 };
 
-Context(IsIntersection){
-	std::string par = "MISSION";
-	std::string sub1 = "NOI";
-	std::string sol = "INO";
-	std::string ret;
-	Spec(noiIntersectsMission){
-		std::sort(par.begin(), par.end());
-		std::sort(sub1.begin(), sub1.end());
-		std::set_intersection(sub1.begin(), sub1.end(), par.begin(), par.end(), back_inserter(ret));
-		Assert::That(ret, Equals(sol));
-	};
-};
+// Context(IsIntersection){
+// 	std::string par = "MISSION";
+// 	std::string sub1 = "NOI";
+// 	std::string sol = "INO";
+// 	std::string ret;
+// 	Spec(noiIntersectsMission){
+// 		std::sort(par.begin(), par.end());
+// 		std::sort(sub1.begin(), sub1.end());
+// 		std::set_intersection(sub1.begin(), sub1.end(), par.begin(), par.end(), back_inserter(ret));
+// 		Assert::That(ret, Equals(sol));
+// 	};
+// };
 
 int main() {
 	// Run all the tests defined above
