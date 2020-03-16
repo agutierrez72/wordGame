@@ -8,6 +8,7 @@
 class Game{
     std::vector<std::string> allTheWords;
     std::unordered_map<std::string, bool> theWords;
+    std::string currWord;
 
     void readWordsFile(std::string filename);
     public:
