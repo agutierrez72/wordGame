@@ -37,28 +37,29 @@ ucm::json Game::generateList(){
 // // pick one random json word
 // // return json word only?
 
-//     std::uniform_int_distribution<> distribution(0, allTheWords.size());
-//     std::mt19937 gen;
-//     gen.seed(std::random_device()());
-
-//     ucm::json tempe;
-//     std::string tmp = allTheWords[distribution(gen)];
-//     // std::vector<char> ex = mixup(tmp);
-//     // for(const auto i : ex.end()){
-//          tempe.push_back(tmp);
-//     // }
-//     return tempe;
-    std::uniform_int_distribution<> distribution(65, 90);
+    std::uniform_int_distribution<> distribution(0, allTheWords.size());
     std::mt19937 gen;
     gen.seed(std::random_device()());
 
     ucm::json temp;
+    std::string tmp = allTheWords[distribution(gen)];
+    std::vector<char> ex = mixup(tmp);
 
-    for (int i = 0; i < 9; i++){
-        temp.push_back(distribution(gen));
-    }
+     for(char i : ex){
+         temp.push_back(i);
+     }
+    // return tempe;
+    // std::uniform_int_distribution<> distribution(65, 90);
+    // std::mt19937 gen;
+    // gen.seed(std::random_device()());
 
-    return temp;
+    // ucm::json temp;
+
+    // for (int i = 0; i < 9; i++){
+    //     temp.push_back(distribution(gen));
+    // }
+
+     return temp;
 
 }// end of generateList
 
