@@ -6,51 +6,65 @@
 
 using namespace igloo;
 
-Context(CheckWord){
-	Game game;
-	ucm::json ans;
-	Spec(CheckFAisInvalid){
-		ans["word"] = "FA ";
-		ans["valid"] = false;
-		Assert::That(game.checkWord("FA "), Equals(ans));
-	};
-	Spec(CheckFACisInvalid){
-		ans["word"] = "FAC ";
-		ans["valid"] = false;
-		Assert::That(game.checkWord("FAC "), Equals(ans));
-	};
-	Spec(CheckTIisValid){
-		ans["word"] = "TI";
-		ans["valid"] = true;
-		Assert::That(game.checkWord("TI"), Equals(ans));
-	};
-	Spec(ChecktiIsValid){
-		ans["word"] = "TI";
-		ans["valid"] = true;
-		Assert::That(game.checkWord("ti"), Equals(ans));
-	};
-	Spec(CheckAdditionIsValid){
-		ans["word"] = "ADDITION";
-		ans["valid"] = true;
-		Assert::That(game.checkWord("Addition"), Equals(ans));
-	};
+// Context(CheckWord){
+// 	Game game;
+// 	ucm::json ans;
+// 	Spec(CheckFAisInvalid){
+// 		ans["word"] = "FA ";
+// 		ans["valid"] = false;
+// 		Assert::That(game.checkWord("FA "), Equals(ans));
+// 	};
+// 	Spec(CheckFACisInvalid){
+// 		ans["word"] = "FAC ";
+// 		ans["valid"] = false;
+// 		Assert::That(game.checkWord("FAC "), Equals(ans));
+// 	};
+// 	Spec(CheckTIisValid){
+// 		ans["word"] = "TI";
+// 		ans["valid"] = true;
+// 		Assert::That(game.checkWord("TI"), Equals(ans));
+// 	};
+// 	Spec(ChecktiIsValid){
+// 		ans["word"] = "TI";
+// 		ans["valid"] = true;
+// 		Assert::That(game.checkWord("ti"), Equals(ans));
+// 	};
+// 	Spec(CheckAdditionIsValid){
+// 		ans["word"] = "ADDITION";
+// 		ans["valid"] = true;
+// 		Assert::That(game.checkWord("Addition"), Equals(ans));
+// 	};
 
+// };
+Context(TestAllSubs){
+	Spec(allSubsAddition){
+		Game game;
+		std::string word = "addition";
+		std::vector<std::string> test;
+		ucm::json isWord;
+		isWord["valid"] = false;
+		//test = game.distinctPowerset(word);
+		
+		 test = game.getAllPossibleSubstrings(word);
+		 for(const auto& n : test){
+		 	isWord = game.checkWord(n);
+		 	if(isWord["valid"] == true){
+		 		std::cout << n << " ";
+		 	}
+		 }
+		
+	};
 };
 
-// Context(IsIntersection){
-// 	std::string par = "MISSION";
-// 	std::string sub1 = "NOI";
-// 	std::string sol = "INO";
-// 	std::string ret;
-// 	Spec(noiIntersectsMission){
-// 		std::sort(par.begin(), par.end());
-// 		std::sort(sub1.begin(), sub1.end());
-// 		std::set_intersection(sub1.begin(), sub1.end(), par.begin(), par.end(), back_inserter(ret));
-// 		Assert::That(ret, Equals(sol));
+// Context(TestStringLength){
+// 	Spec(LengthOfLittleIs6){
+// 		std::string len = "Little";
+// 		Assert::That(len.length(), Equals(6));
 // 	};
 // };
 
 int main() {
 	// Run all the tests defined above
 	return TestRunner::RunAllTests();
+
 }
