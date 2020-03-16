@@ -9,8 +9,11 @@ void Game::readWordsFile(std::string filename){
 
 	while (std::getline(file, str)){
         theWords.insert({boost::to_upper_copy(str), true});
-		allTheWords.push_back(boost::to_upper_copy(str));
-	}
+		
+        if(str.length() == 9){
+            allTheWords.push_back(boost::to_upper_copy(str));
+        }
+    }
 
 }// end of readWordsFile
 
@@ -20,18 +23,31 @@ Game::Game(){
 }// end of Game constructor
 
 ucm::json Game::generateList(){
-
-    std::uniform_int_distribution<> distribution(65, 90);
-    std::mt19937 gen;
-    gen.seed(std::random_device()());
-
     ucm::json temp;
+    temp["word"];
+    temp["subwords"];
+    // for all 9 letter words
+    // for(const auto& n : allTheWords){
+    //     // find all possible substrings of each 9 letter word
+    //     temp.push_back(getAllPossibleSubstrings(n));
+    //     for(const auto& p : temp){
+    //         // if
+    //        ans.push_back(checkWord(p));
+    //    }
+    // }
+  
+    // std::uniform_int_distribution<> distribution(65, 90);
+    // std::mt19937 gen;
+    // gen.seed(std::random_device()());
 
-    for (int i = 0; i < 9; i++){
-        temp.push_back(distribution(gen));
-    }
+    // ucm::json temp;
 
-    return temp;
+    // for (int i = 0; i < 9; i++){
+    //     temp.push_back(distribution(gen));
+    // }
+
+    // return temp;
+
 }// end of generateList
 
 ucm::json Game::checkWord(std::string word){
@@ -47,7 +63,7 @@ ucm::json Game::checkWord(std::string word){
 
     timestamp end = current_time();
     long duration = time_diff(start, end);
-    std::cout << "Took: " << duration << " ms." << std::endl;
+    //std::cout << "Took: " << duration << " ms." << std::endl;
 
     ucm::json temp;
     temp["word"] = word;
@@ -87,7 +103,6 @@ std::vector<std::string> Game::distinctPowerset(std::string str){
                     }
                 }
             }
-
             if(!found){
                 ans.push_back(temp);
             }
@@ -119,13 +134,36 @@ void Game::permute(std::string a, int l, int r, std::unordered_map<std::string, 
 }// end of permute
 
 // Helper Function
+// std::vector<std::string> Game::getAllPossibleSubstrings(std::string word){
+//     std::vector<std::string> ps = distinctPowerset(word);
+//     std::vector<std::string> possible;
+
+//     for(std::string item :ps){
+//         if(item.size() > 0){
+//             if(item.size() == 1){
+//                 possible.push_back(item);
+//             }
+//             else{
+//                 std::unordered_map<std::string, bool> curr;
+//                 permute(item, 0, item.size()-1, curr);
+
+//                 for(auto element : curr){
+//                     possible.push_back(element.first);
+//                 }
+//             }
+//         }
+//     }
+//     return possible;
+// }// end of getAllPossibleSubstrings
+
+// Now only returns valid Substrings
 std::vector<std::string> Game::getAllPossibleSubstrings(std::string word){
     std::vector<std::string> ps = distinctPowerset(word);
     std::vector<std::string> possible;
 
     for(std::string item :ps){
         if(item.size() > 0){
-            if(item.size() == 1){
+            if(item.size() == 1 && checkWord(item)["valid"] == true){
                 possible.push_back(item);
             }
             else{
@@ -133,7 +171,9 @@ std::vector<std::string> Game::getAllPossibleSubstrings(std::string word){
                 permute(item, 0, item.size()-1, curr);
 
                 for(auto element : curr){
-                    possible.push_back(element.first);
+                    if(checkWord(element.first)["valid"] == true){
+                        possible.push_back(element.first);
+                    }       
                 }
             }
         }
@@ -144,7 +184,6 @@ std::vector<std::string> Game::getAllPossibleSubstrings(std::string word){
 std::vector<char> Game::mixup(std::string word){
     // transfer chars from string to a vector of chars
     std::vector<char> result;
-
 
     for(int i = 0; i < word.size(); i++){
         result.push_back(word[i]);

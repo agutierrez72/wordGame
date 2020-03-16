@@ -36,23 +36,25 @@ using namespace igloo;
 // 	};
 
 // };
+
+
 Context(TestAllSubs){
 	Spec(allSubsAddition){
 		Game game;
 		std::string word = "addition";
-		std::vector<std::string> test;
+		std::vector<std::string> test, sol;
+		int count;
 		ucm::json isWord;
 		isWord["valid"] = false;
-		//test = game.distinctPowerset(word);
 		
+		// all possible substrings of "additon"
 		 test = game.getAllPossibleSubstrings(word);
-		 for(const auto& n : test){
-		 	isWord = game.checkWord(n);
-		 	if(isWord["valid"] == true){
-		 		std::cout << n << " ";
-		 	}
-		 }
-		
+
+		// for each substring in "addition"
+		  for(const auto& n : test){
+		 		// count++;
+		  		// std::cout << count << ": " << n << std::endl;		
+		  }
 	};
 };
 
