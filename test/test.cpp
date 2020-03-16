@@ -68,17 +68,20 @@ Context(TestAllSubs){
         	// find all possible substrings of each 9 letter word
        		temp["word"] = word;
         	temp["subwords"] = game.getAllPossibleSubstrings(word);
-        	ans["wordList"].push_back(temp);
+        	ans.push_back(temp);
        		temp["word"] = word2;
         	temp["subwords"] = game.getAllPossibleSubstrings(word2);
-        	ans["wordList"].push_back(temp);
-
-    	for(const auto& n : ans["wordList"]){
-			for(const auto& p : n["subwords"]){
+        	ans.push_back(temp);
+			std::cout << ans.size() << std::endl;
+			auto& p = ans[0];
+			auto& t = p[0];
+			std::cout << t; 
+    	// for(const auto& n : ans["wordList"]){
+		// 	for(const auto& p : n["subwords"]){
 				
-				std::cout << p << " " << std::endl;
-			}
-		}
+		// 		std::cout << p << " " << std::endl;
+		// 	}
+		// }
 	};
 };
 
