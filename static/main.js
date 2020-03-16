@@ -124,4 +124,11 @@ $(document).ready(function(){
 
 		});
 	});
+	$("#solution").click(function(){
+		$.get("/solution", {}, function(response){
+			var sol = JSON.parse(response);
+			document.getElementById("answers").innerHTML = sol;
+			// $("#answers").html(sol);
+		});
+	});
 });

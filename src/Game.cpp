@@ -43,6 +43,7 @@ ucm::json Game::generateList(){
 
     ucm::json temp;
     std::string tmp = allTheWords[distribution(gen)];
+    currWord = tmp;
     std::vector<char> ex = mixup(tmp);
 
      for(char i : ex){
@@ -63,18 +64,10 @@ ucm::json Game::generateList(){
 
 }// end of generateList
 
-// ucm::json Game::solution(){
-//     ucm::json temp, ans;
-//     temp["word"];
-//     temp["subwords"];
-//     // for all 9 letter words
-//     for(const auto& n : allTheWords){
-//         // find all possible substrings of each 9 letter word
-//         temp["word"] = n;
-//         temp["subwords"] = getAllPossibleSubstrings(n);
-//         ans["wordList"].push_back(temp);
-//     }
-// }
+ucm::json Game::solution(){
+    ucm::json sol = getAllPossibleSubstrings(currWord);
+    return sol;
+}
 
 ucm::json Game::checkWord(std::string word){
     word = boost::to_upper_copy(word);
