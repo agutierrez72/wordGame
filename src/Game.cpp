@@ -23,18 +23,16 @@ Game::Game(){
 }// end of Game constructor
 
 ucm::json Game::generateList(){
-    ucm::json temp;
+    ucm::json temp, ans;
     temp["word"];
     temp["subwords"];
     // for all 9 letter words
-    // for(const auto& n : allTheWords){
-    //     // find all possible substrings of each 9 letter word
-    //     temp.push_back(getAllPossibleSubstrings(n));
-    //     for(const auto& p : temp){
-    //         // if
-    //        ans.push_back(checkWord(p));
-    //    }
-    // }
+    for(const auto& n : allTheWords){
+        // find all possible substrings of each 9 letter word
+        temp["word"] = n;
+        temp["subwords"] = getAllPossibleSubstrings(n);
+        ans["wordList"].push_back(temp);
+    }
   
     // std::uniform_int_distribution<> distribution(65, 90);
     // std::mt19937 gen;

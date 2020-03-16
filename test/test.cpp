@@ -39,22 +39,46 @@ using namespace igloo;
 
 
 Context(TestAllSubs){
-	Spec(allSubsAddition){
+	// Spec(allSubsAddition){
+	// 	Game game;
+	// 	std::string word = "addition";
+	// 	std::vector<std::string> test, sol;
+	// 	int count;
+	// 	ucm::json isWord;
+	// 	isWord["valid"] = false;
+		
+	// 	// all possible substrings of "additon"
+	// 	 test = game.getAllPossibleSubstrings(word);
+
+	// 	// for each substring in "addition"
+	// 	  for(const auto& n : test){
+	// 	 		// count++;
+	// 	  		// std::cout << count << ": " << n << std::endl;		
+	// 	  }
+	// };
+	Spec(viewAllSubsAddition){
 		Game game;
 		std::string word = "addition";
-		std::vector<std::string> test, sol;
-		int count;
-		ucm::json isWord;
-		isWord["valid"] = false;
-		
-		// all possible substrings of "additon"
-		 test = game.getAllPossibleSubstrings(word);
+		std::string word2 = "washingto";
+		ucm::json temp, ans;
+    	temp["word"];
+    	temp["subwords"];
+    	// for all 9 letter words
+    	
+        	// find all possible substrings of each 9 letter word
+       		temp["word"] = word;
+        	temp["subwords"] = game.getAllPossibleSubstrings(word);
+        	ans["wordList"].push_back(temp);
+       		temp["word"] = word2;
+        	temp["subwords"] = game.getAllPossibleSubstrings(word2);
+        	ans["wordList"].push_back(temp);
 
-		// for each substring in "addition"
-		  for(const auto& n : test){
-		 		// count++;
-		  		// std::cout << count << ": " << n << std::endl;		
-		  }
+    	for(const auto& n : ans["wordList"]){
+			for(const auto& p : n["subwords"]){
+				
+				std::cout << p << " " << std::endl;
+			}
+		}
 	};
 };
 
