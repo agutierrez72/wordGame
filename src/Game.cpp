@@ -23,30 +23,57 @@ Game::Game(){
 }// end of Game constructor
 
 ucm::json Game::generateList(){
-    ucm::json temp, ans;
-    temp["word"];
-    temp["subwords"];
-    // for all 9 letter words
-    for(const auto& n : allTheWords){
-        // find all possible substrings of each 9 letter word
-        temp["word"] = n;
-        temp["subwords"] = getAllPossibleSubstrings(n);
-        ans["wordList"].push_back(temp);
+//     ucm::json temp, ans;
+//     temp["word"];
+//     temp["subwords"];
+//     // for all 9 letter words
+//     for(const auto& n : allTheWords){
+//         // find all possible substrings of each 9 letter word
+//         temp["word"] = n;
+//         temp["subwords"] = getAllPossibleSubstrings(n);
+//         ans["wordList"].push_back(temp);
+//     }
+// // now we have a json of json words and their substrings
+// // pick one random json word
+// // return json word only?
+
+//     std::uniform_int_distribution<> distribution(0, allTheWords.size());
+//     std::mt19937 gen;
+//     gen.seed(std::random_device()());
+
+//     ucm::json tempe;
+//     std::string tmp = allTheWords[distribution(gen)];
+//     // std::vector<char> ex = mixup(tmp);
+//     // for(const auto i : ex.end()){
+//          tempe.push_back(tmp);
+//     // }
+//     return tempe;
+    std::uniform_int_distribution<> distribution(65, 90);
+    std::mt19937 gen;
+    gen.seed(std::random_device()());
+
+    ucm::json temp;
+
+    for (int i = 0; i < 9; i++){
+        temp.push_back(distribution(gen));
     }
-  
-    // std::uniform_int_distribution<> distribution(65, 90);
-    // std::mt19937 gen;
-    // gen.seed(std::random_device()());
 
-    // ucm::json temp;
-
-    // for (int i = 0; i < 9; i++){
-    //     temp.push_back(distribution(gen));
-    // }
-
-    // return temp;
+    return temp;
 
 }// end of generateList
+
+// ucm::json Game::solution(){
+//     ucm::json temp, ans;
+//     temp["word"];
+//     temp["subwords"];
+//     // for all 9 letter words
+//     for(const auto& n : allTheWords){
+//         // find all possible substrings of each 9 letter word
+//         temp["word"] = n;
+//         temp["subwords"] = getAllPossibleSubstrings(n);
+//         ans["wordList"].push_back(temp);
+//     }
+// }
 
 ucm::json Game::checkWord(std::string word){
     word = boost::to_upper_copy(word);

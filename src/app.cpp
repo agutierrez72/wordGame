@@ -27,5 +27,9 @@ int main(int argc, char** argv){
         }
     });
 
+    server.route("/solution", [&](const request& req, response& res){
+
+    });
+
     server.run();
 }
